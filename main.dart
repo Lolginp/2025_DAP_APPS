@@ -1,6 +1,3 @@
-
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 
 void main() {
@@ -15,145 +12,81 @@ class MainApp extends StatefulWidget {
 }
 
 class _MainAppState extends State<MainApp> {
-  String texto = 'Hola';
-  double size = 30;
-  Color textColor = Colors.black12;
-  int intervalo = 400;
-  late Timer timer; 
-  bool mostrarTexto = true; 
-  void iParpadeo() {
-    timer = Timer.periodic(Duration(milliseconds: intervalo), (Timer timer) {
-      setState(() {
-        mostrarTexto = !mostrarTexto;
-        texto = mostrarTexto ? 'Hola' : '';
-      });
-    });
-  }
-
-  void dParpadeo() {
-    timer.cancel(); 
-  }
-
+  TextEditingController inputControllerC = TextEditingController();
+  TextEditingController inputControllerU = TextEditingController();
+  String inputContra = '';
+  String inputUsuar = '';
+  IconData visible = Icons.visibility;
+  IconData novisible = Icons.visibility_off;
+  bool contrasenanovis = true;
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Scaffold(
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Text(
-                texto,
-                style: TextStyle(fontSize: size, color: textColor),
+        home: Scaffold(
+        body: Column(
+          mainAxisAlignment: MainAxisAlignment.center, 
+          crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          SizedBox(height: 40),
+          Text(inputContra),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 40),
+            child: TextField(
+              controller: inputControllerU,
+              decoration: const InputDecoration(
+                border: OutlineInputBorder(),
+                labelText: 'Usuario',
               ),
-              const SizedBox(height: 20),
-              Row(   
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  ElevatedButton(
-                    onPressed: () {
-                      setState(() {
-                        texto = 'Hola';
-                      });
-                    },
-                    child: const Text('MOSTRAR'),
-                  ),
-                  const SizedBox(width: 20), // Espacio entre los botones
-                  ElevatedButton(
-                    onPressed: () {
-                      setState(() {
-                        texto = ' ';
-                      });
-                    },
-                    child: const Text('BORRAR'),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 20),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  ElevatedButton(
-                    onPressed: (){
-                      setState(() {
-                        size =  size + 10;
-                      });
-                    }, 
-                    onLongPress: () {
-                      setState(() {
-                        size = size *2;
-                      });
-                    },
-                    child:Text("++"),
-                  ),
-                  const SizedBox(width: 20), // espacio entre los botones
-                  ElevatedButton(
-                    onPressed:(){
-                      setState(() {
-                        size =  size - 10;
-                      });
-                    },
-                    onLongPress: () {
-                      setState(() {
-                        size = size /2;
-                      });
-                    },
-                    child: Text("--"),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 20), // botones debajo de los del fontsize
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  ElevatedButton(
-                    onPressed: (){
-                      setState(() {
-                        textColor = Colors.blue;
-                      });
-                    }, 
-                    onLongPress: () {
-                      setState(() {
-                        textColor = Colors.blueGrey;
-                      });
-                    },
-                    child: Text("AZUL"),
-                  ),
-                  const SizedBox(width: 20),
-                  ElevatedButton(
-                    onPressed:() {
-                      setState(() {
-                      textColor = Colors.red;
-                      });
-                    }, 
-                    onLongPress: () {
-                      setState(() {
-                      textColor = Colors.deepOrange;
-                      });
-                    },
-                    child: Text("ROJO"),
-                  ),
-                ],
-              ),  
-              const SizedBox(height: 20),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  ElevatedButton(
-                    onPressed: iParpadeo,
-                    child:Text("PARPADEO"),
-                  ),
-                  SizedBox(width: 20),
-                  ElevatedButton(
-                    onPressed:dParpadeo,
-                    child: Text("Detener")),
-                ],
-                ),         
-            ],
+            ),
           ),
-        ),
+          SizedBox(height: 20),
+          Row(mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 40),
+                child: TextField(
+                  obscureText: contrasenanovis,
+                  controller: inputControllerC,
+                  decoration: const InputDecoration(
+                    border: OutlineInputBorder(),
+                    labelText: 'Contraseña',
+                  ),
+                ),
+              ),
+              SizedBox(width: 10),
+              ElevatedButton(onPressed:() {
+                setState(() {
+                  contrasenanovis = !contrasenanovis;
+                });
+              }, 
+              child: Icon(
+                    contrasenanovis ? visible : novisible, 
+                    color: Colors.black, 
+                    size: 24, 
+                  ),
+              )
+            ]
+          ),
+          SizedBox(height: 20),
+          ElevatedButton(
+              onPressed: () {
+                setState(() {
+                  inputContra = inputControllerC.text;
+                  inputUsuar = inputControllerU.text;
+                  if (inputContra == 'contraseña' && inputUsuar == 'lolo'){
+                    inputContra = 'El ingreso es correcta puedes ingresar';
+                  }
+                  else{
+                    inputContra = 'La contraseña y/o ususario son incorrectos ';
+                  }
+                });
+              },
+              child: const Text('Ingresar')
+          )
+        ]),
       ),
     );
   }
 }
+
+//SnackBar
