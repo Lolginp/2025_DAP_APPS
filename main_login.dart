@@ -12,7 +12,7 @@ class MainApp extends StatefulWidget {
 }
 
 class _MainAppState extends State<MainApp> {
-  final GlobalKey<ScaffoldMessengerState> scaffoldMessengerKey = GlobalKey<ScaffoldMessengerState>(); //La golbal key que es usada a lo largo del código es apra amnetener un estado en este caso de la app, y asignarlo desde otras partes del código. Esto puede ser usado en widgets y en este caso fue usaod para el mensaje del snack bar. Dentro del return material app, se llamara a esta global key lo que permite encontrar el context, para el Scaffold meesage. Esto fue agregado ya que antes sin esta función el mensaje no aparecía. 
+  final GlobalKey<ScaffoldMessengerState> scaffoldMessengerKey = GlobalKey<ScaffoldMessengerState>(); //La golbal key que es usada a lo largo del código es apra amnetener un estado en este caso de la app, y asignarlo desde otras partes del código. Esto puede ser usado en widgets y en este caso fue usado para el mensaje del snack bar. Dentro del return material app, se llamara a esta global key lo que permite encontrar el context, esto se podría asemejar a la ubicación del widget dentro del código y permite acceder a información en este caso para el Scaffold meesage. Esto fue agregado ya que antes sin esta función el mensaje no aparecía. 
 
   TextEditingController inputControllerC = TextEditingController();
   TextEditingController inputControllerU = TextEditingController();
