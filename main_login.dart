@@ -27,7 +27,7 @@ class _MainAppState extends State<MainApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      scaffoldMessengerKey: scaffoldMessengerKey, //Acá se llama a la 'llave' para obtener el context
+      scaffoldMessengerKey: scaffoldMessengerKey, //Acá se llama a la 'llave' para obtener el context, debido a que este esta por afuera del scaffold entonces una vez obtenido en este momento, se podrá utilizar más abajo.
       home: Scaffold(
         body: Center(
           child: Column(
